@@ -1,0 +1,100 @@
+hosts:
+  manager: []
+  worker: []
+
+swarm:
+  default_address_pool:
+    base: 10.0.0.0/8
+    size: 24
+
+registries:
+- username:
+  password:
+
+ansible:
+  python_interpreter: python3
+
+image:
+  registry: harbor.sun-asterisk.vn/jfs
+  tag: latest
+  webserver: web-server
+  apiserver: api-server
+  cli: cli
+
+webserver:
+  replica_count: 1
+
+apiserver:
+  replica_count: 1
+
+worker:
+  replica_count: 1
+
+domain: jfs.local
+
+tls:
+  enabled: false
+  acme:
+    email: admin@jfs.local
+
+basic_auth:
+  enabled: false
+  username:
+  password:
+
+config:
+  app:
+    name: sun_jobfair
+    key:
+    env: production
+    debug: "false"
+    url: http://jobfair.local
+
+  server:
+    api:
+      url: http://api/api
+
+  session:
+    driver: redis
+
+  cache:
+    driver: redis
+
+  sentry:
+    dns:
+
+  log:
+    channel: stack
+
+  filesystem:
+    driver: public
+
+  queue:
+    connection: redis
+
+  broadcast:
+    driver: redis
+
+  mail:
+    mailer: smtp
+    host: smtp.mailtrap.io
+    port: 2525
+    username:
+    password:
+    encryption: tls
+
+extra_env_vars: {}
+
+php: {}
+
+phpfpm: {}
+
+mariadb:
+  extra_args: []
+  database: jobfair
+  username: jobfair
+  password:
+  root_password:
+  random_root_password: no
+
+data_dir: /data

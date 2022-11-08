@@ -1,0 +1,88 @@
+.task-details {
+  .ant-btn:hover,
+  .ant-btn:focus {
+    color: black;
+    border-color: #d9d9d9;
+  }
+  ::-webkit-scrollbar {
+    width: 12px !important;
+    height: 12px !important;
+  }
+  .title {
+    display: flex;
+    position: absolute;
+    top: 200px;
+  }
+  .list__button {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+
+    .button__right {
+      button {
+        margin-left: 15px;
+      }
+    }
+  }
+
+  .stt {
+    border: 1px solid;
+    padding: 5px 10px;
+    font-weight: 600;
+  }
+
+  .info__tplt {
+    span {
+      padding-right: 10px;
+      margin-right: 5px;
+    }
+  }
+  .list__task {
+    display: flex;
+    align-items: center;
+    height: auto;
+    width: 100%;
+    // border: 1px solid #d9d9d9;
+    box-shadow: 2px #b5b5b8;
+    margin: 0 5px;
+    border-radius: 5px;
+    flex-wrap: wrap;
+    li {
+      white-space: nowrap;
+      padding: 2px;
+    }
+    .ant-tag,
+    .ant-tag a,
+    .ant-tag a {
+      color: rgba(37, 99, 235, var(--tw-text-opacity));
+    }
+  }
+  .list__member {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    li {
+      margin-right: 10px;
+    }
+  }
+  .des {
+    padding: 13px;
+    border: 1px solid #b5b5b8;
+    border-radius: 6px;
+    height: 175px;
+    overflow: auto;
+  }
+
+  .list-items {
+    a:hover {
+      color: #ffd803;
+    }
+  }
+
+  .task_list {
+    li {
+      list-style-type: disc;
+    }
+  }
+}

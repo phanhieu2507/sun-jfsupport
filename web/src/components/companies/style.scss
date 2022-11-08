@@ -1,0 +1,51 @@
+.list-company {
+  .ant-table-row:hover {
+    cursor: default;
+  }
+
+  h1 {
+    margin-left: 0px;
+  }
+  .ant-select-arrow {
+    display: flex;
+    justify-items: center;
+    align-self: center;
+    align-items: center;
+  }
+  // list
+  .ant-table-thead > tr > * {
+    background-color: #bae8e8 !important;
+    font-size: 16px;
+  }
+
+  .ant-table-pagination-right {
+    justify-content: center;
+  }
+
+  .ant-pagination-options-size-changer.ant-select {
+    display: none;
+  }
+
+  .ant-table-container {
+    position: relative;
+  }
+
+  .input-category {
+    // height: 36px;
+    width: -webkit-fill-available !important;
+    margin-top: -4px;
+    padding-left: 3px;
+  }
+  // add form
+  .ant-form-item-required::after {
+    display: none;
+  }
+}
+
+.add-category {
+  .ant-modal-close-x {
+    margin-top: -4px;
+  }
+}
+
+

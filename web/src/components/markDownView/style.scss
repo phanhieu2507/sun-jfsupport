@@ -1,0 +1,22 @@
+.mark_down_preview ul li::before{
+	display: inline-block;
+	content: '';
+	border-radius: 50%;
+	height: 0.3rem;
+	width: 0.3rem;
+	margin-right: 0.5rem;
+	background-color: black;
+}
+.mark_down_preview ol li{
+	counter-increment: step-counter;
+}
+.mark_down_preview ol li::before {
+	display: inline-block;
+	content: counter(step-counter)".";
+    margin-right: 5px;
+    color: black;
+    font-weight: 400;
+    padding: 3px 8px;
+}
+
+

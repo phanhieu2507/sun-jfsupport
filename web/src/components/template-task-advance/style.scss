@@ -1,0 +1,16 @@
+.advance{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .button_cacel {
+      background-color: white !important;
+      border: 1px solid rgb(224, 222, 222) !important;
+    }
+  
+    .button_cacel:hover {
+      color: #ffd803 !important;
+      border: 1px solid #ffd803 !important;
+    }
+  
+}
+

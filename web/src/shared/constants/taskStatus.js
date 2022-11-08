@@ -1,0 +1,5 @@
+export const NEW = '未着手'
+export const IN_PROGRESS = '進行中'
+export const DONE = '完了'
+export const PENDING = '中断'
+export const BREAK = '未完了'

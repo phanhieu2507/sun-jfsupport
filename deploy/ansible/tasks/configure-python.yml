@@ -1,0 +1,11 @@
+---
+- name: Ensure Python modules are installed
+  become: true
+  apt:
+    name:
+    - python3-docker
+    - python3-jsondiff
+    - python3-yaml
+    - python3-passlib
+    state: latest
+    update_cache: yes

@@ -1,0 +1,17 @@
+.edit-jf-schedule {
+  .ant-form-item-label {
+    text-align: right;
+  }
+
+  .ant-form-item-label > label {
+    font-weight: 700;
+  }
+
+  .ant-form-item-label > label::after {
+    content: '';
+  }
+
+  div.ant-form-item-control-input-content {
+    margin: 0px 16px;
+  }
+}

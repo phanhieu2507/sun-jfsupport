@@ -1,0 +1,23 @@
+.task-sub-table {
+  .option-active {
+    background-color: #ffd803 !important;
+    border-radius: 10px !important;
+  }
+  img:hover {
+    filter: invert(83%) sepia(27%) saturate(2852%) hue-rotate(353deg)
+      brightness(108%) contrast(106%);
+    cursor: pointer;
+  }
+  .ant-card-body{
+    padding: 0 !important;
+  }
+  .ant-tag {
+    font-size: 14px;
+    font-weight: bold;
+  }
+  // .ant-tag-has-color {
+  //   font-size: 14px;
+  //   font-weight: bold;
+  //   color: white;
+  // }
+}

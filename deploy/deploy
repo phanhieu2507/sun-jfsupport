@@ -1,0 +1,37 @@
+#!/bin/bash
+
+export DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+
+source "$DIR/lib/libutils.sh"
+
+require log ansible ytt
+
+env="$1"
+
+if [ -z $env ]; then
+    inventory="$DIR/inventory.yml"
+    values="$DIR/values.yml"
+else
+    inventory="$DIR/inventory.$env.yml"
+    values="$DIR/values.$env.yml"
+fi
+
+if [ ! -f $values ]; then
+    fatal "Values file not found. Trying to read from $values"
+fi
+
+if [ -f $inventory ]; then
+    mv $inventory "$inventory.backup"
+fi
+
+tpl $values inventory.yml > $inventory
+
+if [ "$ASKPASS" == "true" ] || [ "$ASKPASS" == "yes" ]; then
+    ask_pass_flag="--ask-become-pass"
+fi
+
+for playbook in ${@:2}; do
+    playbooks+="$DIR/ansible/$playbook "
+done
+
+ansible-playbook -i $inventory $ask_pass_flag $playbooks -e "{\"force\": $FORCE}"

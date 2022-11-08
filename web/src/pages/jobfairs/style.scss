@@ -1,0 +1,59 @@
+.JFList {
+  .ant-slider-track {
+    background-color: #ffd803 !important;
+  }
+  .ant-slider-rail {
+    background-color: #e3f6f5 !important;
+  }
+  .ant-slider-handle {
+    background-color: #272343 !important;
+  }
+  thead[class*='ant-table-thead'] th {
+    background-color: #bae8e8 !important;
+  }
+  .icon {
+    font-size: 18px !important;
+    font-weight: 600;
+    :hover {
+      color: #ffd803;
+    }
+  }
+  .ant-btn-text:hover,
+      .ant-btn-text:focus {
+            border-radius: 15px !important;
+            border-color: #ffd803 !important;
+            background-color: #ffd803 !important;
+      }
+  .ant-pagination-item > a:hover,
+  .ant-pagination-item-active > a,
+  .ant-pagination-item-active {
+    background-color: #ffd803 !important;
+    color: #272343 !important;
+  }
+  .ant-pagination-item-link:hover {
+    border-color: #ffd803;
+    color: #ffd803;
+  }
+  .spaceMG{
+    margin-bottom: 5px;
+  }
+  .spaceM{
+    margin-bottom: 8px;
+  }
+  .ant-popover {
+    width: 400px !important;
+  }
+  .ant-btn:hover,
+    .ant-btn:focus {
+      color: black;
+      border-color: #d9d9d9;
+    }
+    .ant-btn
+    {
+      color: black;
+    }
+    .ant-select-selector {
+      display: flex;
+      align-items: center;
+    }
+}

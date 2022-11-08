@@ -1,0 +1,186 @@
+default:
+  workspace: shared
+
+.docker-build: &docker-build
+  image: docker:stable
+  services:
+  - docker:stable-dind
+  script:
+  - export TAG=$CHANNEL
+  - export UNIQUE_TAG=build-$CI_BUILD_NUMBER-$BUILD_ENV
+  - apk add --no-cache make
+  - echo $REGISTRY_PASSWORD | docker login $REGISTRY_PATH -u $REGISTRY_LOGIN --password-stdin
+  - make pull
+  - make build
+  - make release
+
+.deploy: &deploy
+  image: docker:stable
+  script:
+  - mkdir -p ~/.ssh
+  - echo "$DEPLOY_KEY" > ~/.ssh/id_rsa
+  - chmod 600 ~/.ssh/id_rsa
+  - ssh-keyscan $DEPLOY_SERVER_HOST > ~/.ssh/known_hosts
+  - export DOCKER_HOST=ssh://$DEPLOY_SERVER_USER@$DEPLOY_SERVER_HOST
+  - export TAG="build-$CI_BUILD_NUMBER-$BUILD_ENV"
+  - export WEB_SERVER_IMAGE="$REGISTRY_PATH/web-server:$TAG"
+  - export API_SERVER_IMAGE="$REGISTRY_PATH/api-server:$TAG"
+  - export CLI_IMAGE="$REGISTRY_PATH/cli:$TAG"
+  - export DEPLOY_STACK=${DEPLOY_STACK:-jobfair}
+  - echo $REGISTRY_PASSWORD | docker login $REGISTRY_PATH -u $REGISTRY_LOGIN --password-stdin
+  - docker pull $WEB_SERVER_IMAGE
+  - docker pull $API_SERVER_IMAGE
+  - docker pull $CLI_IMAGE
+  - docker tag $WEB_SERVER_IMAGE "$REGISTRY_PATH/web-server:$CHANNEL"
+  - docker tag $API_SERVER_IMAGE "$REGISTRY_PATH/api-server:$CHANNEL"
+  - docker tag $CLI_IMAGE "$REGISTRY_PATH/cli:$CHANNEL"
+  - docker service update --quiet --with-registry-auth --image=$WEB_SERVER_IMAGE "${DEPLOY_STACK}_web"
+  - docker service update --quiet --with-registry-auth --image=$API_SERVER_IMAGE "${DEPLOY_STACK}_api"
+  - docker service update --quiet --with-registry-auth --image=$CLI_IMAGE "${DEPLOY_STACK}_worker"
+  - docker service update --quiet --with-registry-auth --image=$CLI_IMAGE "${DEPLOY_STACK}_scheduler"
+
+.stg-build-env: &stg-build
+  CHANNEL: develop
+  BUILD_ENV: stg
+
+.prod-build-env: &prod-build
+  CHANNEL: stable
+  BUILD_ENV: prod
+
+.master: &master
+  branches:
+  - master
+
+.develop: &develop
+  branches:
+  - develop
+
+.pr: &pull-request
+  events:
+  - pull_request
+
+stages:
+  - install
+  - check
+  - build
+  - deploy
+
+
+jobs:
+  - name: install:yarn
+    stage: install
+    workspace: shared
+    image: node:14-alpine
+    script:
+      - apk add git --no-cache
+      - yarn
+    cache:
+      - key: node_modules_$CI_BRANCH
+        paths:
+        - web/node_modules
+
+  - name: install:composer
+    stage: install
+    workspace: shared
+    image: sunasteriskrnd/php-workspace:7.4
+    script:
+      - composer install -d api
+    cache:
+      - key: vendor_$CI_BRANCH
+        paths:
+          - api/vendor
+
+  - name: check:eslint
+    stage: check
+    workspace: shared
+    image: node:14-alpine
+    script:
+      - yarn lint
+
+  - name: check:phpcs
+    stage: check
+    workspace: shared
+    image: vanquynguyen/php-workspace
+    script:
+      - composer sniff -d api
+
+  - name: check:phpunit
+    stage: check
+    workspace: shared
+    image: vanquynguyen/php-workspace
+    allow_failure: true
+    services:
+      - name: mysql
+        image: mariadb:10
+        environment:
+          MYSQL_DATABASE: jobfair_support
+          MYSQL_USER: jobfair_support
+          MYSQL_PASSWORD: secret
+          MYSQL_ROOT_PASSWORD: secret
+    script:
+      - docker-php-ext-disable xdebug
+      - cd api
+      - cp .env.example .env
+      - php artisan key:generate
+      - php artisan migrate
+      - composer coverage
+    artifacts:
+      name: PHPUnit
+      paths:
+        - api/coverage
+      expires_in: 3 days
+    coverage:
+      type: clover
+      path: api/coverage.xml
+
+  - name: Staging build
+    stage: build
+    environment:
+      <<: *stg-build
+      APP_URL: https://jf-support-stg.sun-asterisk.vn
+      APP_ENV: production
+      SERVER_API_URL: http://api/api
+      BROWSER_API_URL: /api
+      IMAGE_URL: https://jf-support-stg.sun-asterisk.vn/images
+      SENTRY_DSN: https://78e9980015fa4b0caa2de706d1064572@sentry.io/187078944
+      MIX_GA_ID: UA-88817199-2043
+    <<: *docker-build
+    only: *develop
+    except: *pull-request
+
+  - name: Production build
+    stage: build
+    environment:
+      <<: *prod-build
+      APP_URL: https://jf-support.sun-asterisk.vn
+      APP_ENV: production
+      SERVER_API_URL: http://api/api
+      BROWSER_API_URL: /api
+      IMAGE_URL: https://jf-support.sun-asterisk.vn/images
+      SENTRY_DSN: https://78e9980015fa4b0caa2de706d1064572@sentry.io/187078944
+      MIX_GA_ID: UA-88817199-2043
+    <<: *docker-build
+    only: *master
+    except: *pull-request
+
+  - name: Staging deploy
+    stage: deploy
+    environment: *stg-build
+    before_script:
+    - export DEPLOY_KEY="$STAGING_DEPLOY_KEY"
+    - export DEPLOY_SERVER_HOST="$STAGING_SERVER_HOST"
+    - export DEPLOY_SERVER_USER="$STAGING_SERVER_USER"
+    <<: *deploy
+    only: *develop
+    except: *pull-request
+
+  - name: Production deploy
+    stage: deploy
+    environment: *prod-build
+    before_script:
+    - export DEPLOY_KEY="$PRODUCTION_DEPLOY_KEY"
+    - export DEPLOY_SERVER_HOST="$PRODUCTION_SERVER_HOST"
+    - export DEPLOY_SERVER_USER="$PRODUCTION_SERVER_USER"
+    <<: *deploy
+    only: *master
+    except: *pull-request

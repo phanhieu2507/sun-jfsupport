@@ -1,0 +1,101 @@
+.navbar {
+  background-color: #e3f6f5;
+  color: #272343;
+  font-size: 16px;
+}
+
+.cursor-pointer {
+  span > svg {
+    margin-top: -0.5rem;
+  }
+}
+
+.bell-icon-container {
+  position: relative;
+  margin-right: 15px;
+  cursor: pointer;
+}
+
+.bell-icon {
+  font-size: 1.75rem;
+}
+
+.background {
+  background-color: #197278;
+}
+
+.number-notifications {
+  position: absolute;
+  padding: 5px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  font-size: 0.9rem;
+  border-radius: 50%;
+  background-color: red;
+  color: white;
+  top: -20%;
+  left: 60%;
+}
+
+.user-icon-container {
+  border: 2px solid black;
+  border-radius: 100%;
+  background-color: #ffd803;
+  cursor: pointer;
+  .user-icon {
+    font-size: 1.25rem;
+    padding: 10px;
+  }
+}
+
+.notification {
+  width: 450px;
+  .noti-header {
+    display: flex;
+    justify-content: space-between;
+    padding-left: 15px;
+    padding-right: 10px;
+  }
+
+  .noti-title {
+    font-size: 18px;
+  }
+
+  .noti-checked {
+    font-size: 18px;
+  }
+
+  .ant-list-items {
+    margin: auto;
+    height: 450px;
+    max-height: 520px;
+    overflow: auto;
+    cursor: pointer;
+    .noti-time {
+      padding-left: 48px;
+    }
+
+    .delete-btn {
+      margin: auto;
+      height: 100%;
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  .ant-list-item-meta {
+    align-items: center;
+  }
+
+  .ant-list-item:hover {
+    background: rgba(0, 0, 0, 0.05);
+  }
+  .noti-footer {
+    display: flex;
+    flex-direction: row-reverse;
+  }
+
+  .noti-list-item {
+    width: 340px;
+  }
+}

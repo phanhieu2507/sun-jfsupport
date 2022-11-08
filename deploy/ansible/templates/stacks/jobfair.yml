@@ -1,0 +1,166 @@
+version: '3.5'
+
+x-application-env: &application-env
+  APP_NAME: "{{ config.app.name }}"
+  APP_KEY: "{{ config.app.key }}"
+  APP_URL: "{{ config.app.url }}"
+  SERVER_API_URL: "{{ config.server.api.url }}"
+  APP_ENV: "{{ config.app.env }}"
+  APP_DEBUG: "{{ config.app.debug }}"
+
+  DB_HOST: mariadb
+  DB_PORT: 3306
+  DB_DATABASE: "{{ mariadb.database }}"
+  DB_USERNAME: "{{ mariadb.username }}"
+  DB_PASSWORD: "{{ mariadb.password }}"
+
+  CACHE_DRIVER: "{{ config.cache.driver }}"
+  SESSION_DRIVER: "{{ config.session.driver }}"
+  BROADCAST_DRIVER: "{{ config.broadcast.driver }}"
+  QUEUE_CONNECTION: "{{ config.queue.connection }}"
+
+  FILESYSTEM_DRIVER: "{{ config.filesystem.driver }}"
+  QUEUE_CONNECTION: "{{ config.queue.connection }}"
+
+  REDIS_HOST: redis
+  SENTRY_DSN: "{{ config.sentry.dns }}"
+  LOG_CHANNEL: "{{ config.log.channel }}"
+
+  MAIL_MAILER: "{{ config.mail.mailer }}"
+  MAIL_HOST: "{{ config.mail.host }}"
+  MAIL_PORT: "{{ config.mail.port }}"
+  MAIL_USERNAME: "{{ config.mail.username }}"
+  MAIL_PASSWORD: "{{ config.mail.password }}"
+  MAIL_ENCRYPTION: "{{ config.mail.encryption }}"
+
+  SLACK_TOKEN: "{{ config.slack.token }}"
+  WORKSPACE: "{{ config.slack.workspace }}"
+  BOT_ID: "{{ config.slack.botID }}"
+  SIGNING_SECRET: "{{ config.slack.signingSecret }}"
+  SUPER_ADMIN_ID: "{{ config.slack.superAminID }}"
+
+  {% for key in extra_env_vars %}
+  {{ key }}: "{{ extra_env_vars[key] }}"
+  {% endfor %}
+
+  {% for key in php %}
+  PHP.{{ key }}: "{{ php[key] }}"
+  {% endfor %}
+
+  PHP_FPM.pm: ondemand
+  PHP_FPM.pm.max_children: 40
+  PHP_FPM.pm.process_idle_timeout: 300s
+
+  {% for key in phpfpm %}
+  PHP_FPM.{{ key }}: "{{ phpfpm[key] }}"
+  {% endfor %}
+
+x-application-volumes: &application-volumes
+  volumes:
+    - {{ data_dir }}/jfs/storage/app/public:/srv/jfs/storage/app/public
+
+x-healthcheck-bootstrap-file: &healthcheck-bootstrap-file
+  test: ["CMD", "test", "-f", "/srv/jfs/bootstrap/app.php"]
+  interval: 15s
+  timeout: 5s
+  retries: 3
+
+services:
+  web:
+    image: "{{ webserver_image }}"
+    environment: *application-env
+    deploy:
+      replicas: {{ webserver.replica_count | int }}
+      labels:
+        - traefik.enable=true
+        - traefik.http.routers.web.rule=Host(`{{ domain }}`)
+        - traefik.http.routers.web.entrypoints={{ traefik_entrypoint }}
+        - traefik.http.services.web.loadbalancer.server.port=3000
+        # - traefik.http.routers.web.middlewares=web-auth
+        # - traefik.http.middlewares.web-auth.basicauth.usersFile=/etc/traefik/jfs.htpasswd
+    networks:
+      default:
+      traefik:
+
+  api:
+    image: "{{ apiserver_image }}"
+    environment: *application-env
+    <<: *application-volumes
+    networks:
+      - default
+      - traefik
+    deploy:
+      replicas: {{ apiserver.replica_count | int }}
+      labels:
+        - traefik.enable=true
+        - traefik.http.routers.api.entrypoints={{ traefik_entrypoint }}
+        - traefik.http.routers.api.rule=Host(`{{ domain }}`) && PathPrefix(`/api`)
+        - traefik.http.services.api.loadbalancer.server.port=80
+    healthcheck: *healthcheck-bootstrap-file
+
+  worker:
+    image: "{{ cli_image }}"
+    command: worker
+    environment: *application-env
+    <<: *application-volumes
+    deploy:
+      replicas: {{ worker.replica_count | int }}
+
+  scheduler:
+    image: "{{ cli_image }}"
+    command: cron
+    environment: *application-env
+    <<: *application-volumes
+
+  echo-server:
+    image: sunasteriskrnd/laravel-echo-server:1.6
+    environment:
+      REDIS_KEY_PREFIX: sun_jobfair_database_
+      REDIS_HOST: redis
+      AUTH_HOST: http://api
+      AUTH_ENDPOINT: /broadcasting/auth
+      DEV_MODE: "true"
+    deploy:
+      labels:
+        - traefik.enable=true
+        - traefik.http.routers.ws.rule=Host(`{{ domain }}`) && PathPrefix(`/socket.io`)
+        - traefik.http.routers.ws.entrypoints={{ traefik_entrypoint }}
+        - traefik.http.services.ws.loadbalancer.server.port=6001
+        # - traefik.http.routers.ws.middlewares=web-auth
+    networks:
+      - default
+      - traefik
+
+  redis:
+    image: redis:alpine
+    volumes:
+      - {{ data_dir }}/jfs/redis:/data
+
+  mariadb:
+    image: mariadb:10
+    environment:
+      MYSQL_DATABASE: "{{ mariadb.database }}"
+      MYSQL_USER: "{{ mariadb.username }}"
+      MYSQL_PASSWORD: "{{ mariadb.password }}"
+      MYSQL_ROOT_PASSWORD: "{{ mariadb.root_password }}"
+      MYSQL_RANDOM_ROOT_PASSWORD: "{{ mariadb.random_root_password }}"
+    volumes:
+      - {{ data_dir }}/jfs/mariadb:/var/lib/mysql
+
+  db-backup:
+    image: sunasteriskrnd/db-backup:latest
+    restart: always
+    volumes:
+      - {{ data_dir }}/jfs/db-backup:/data/backup
+    environment:
+      DB_TYPE: mariadb
+      DB_HOST: mariadb
+      DB_DATABASE: "{{ mariadb.database }}"
+      DB_USER: "{{ mariadb.username }}"
+      DB_PASSWORD: "{{ mariadb.password }}"
+      DB_BACKUP_MAX_FILES: "7"
+      DB_BACKUP_MAX_DAYS: "7"
+
+networks:
+  traefik:
+    external: true

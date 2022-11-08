@@ -1,0 +1,12 @@
+.container__kanban {
+  .ant-layout-content {
+    // padding: 0px !important;
+    // height: 100vh !important;
+  }
+  .container__column{
+    height: 100vh !important;
+  }
+  .ant-card-body{
+    min-height: 150px !important;
+  }
+}

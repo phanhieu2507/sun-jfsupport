@@ -1,0 +1,49 @@
+.status{
+    width: 100%;
+    border: 1px solid #2d334a;
+    padding: 30px 20px;
+    border-radius: 10px;
+    
+    .chart__stt{
+        width: 100%;
+        height: 15px;
+        display: flex;
+        .new{         
+            height: 15px;
+            background: #5EB5A6;
+        }
+        .in__propress{         
+            height: 15px;
+            background: #A1AF2F;
+        }
+        .done{         
+            height: 15px;
+            background: #4488C5;
+        }
+        .pending{         
+            height: 15px;
+            background: rgb(185, 86, 86);
+        }
+        .break{         
+            height: 15px;
+            background: rgb(121, 86, 23);
+        }
+    }
+        // .name__stt{
+        //     margin-top: 20px;
+        //    display: flex;
+        //    .stt__If{
+        //        margin: 0 2px;
+        //        span:hover{
+        //         opacity: 0.7;
+        //    }
+        //    }
+        //    .new__if{
+        //        text-align: center;
+        //        margin-bottom: 5px;
+            
+        
+        // }
+            
+        // }
+}

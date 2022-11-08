@@ -1,0 +1,27 @@
+.toppage-jf-list{
+    // margin: 30px 0;
+    .ant-table-thead{
+        display: none !important;
+    }
+    .bottom-row{
+        .sp{
+            margin: 0 6px;
+        }
+    }
+    .ant-table-thead > tr > th, .ant-table-tbody > tr > td, .ant-table tfoot > tr > th{
+        padding: 13px 16px;
+    }
+    img:hover{
+        filter: invert(83%) sepia(27%) saturate(2852%) hue-rotate(353deg) brightness(108%) contrast(106%);
+        cursor: pointer;
+        
+    }
+    .hv-icon:hover{
+        color: #ffd803;
+    }
+    .time {
+        position: absolute;
+        top: 17px;
+        right: 17px;
+    }
+}

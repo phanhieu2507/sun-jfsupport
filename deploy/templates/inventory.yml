@@ -1,0 +1,139 @@
+#@yaml/text-templated-strings
+#@ load("@ytt:data", "data")
+#@ load("@ytt:struct", "struct")
+---
+manager:
+  hosts:
+    #@ for host in data.values.hosts.manager:
+    (@= host.name @):
+      ansible_host: #@ host.hostname
+      #@ if/end hasattr(host, "port"):
+      ansible_port: #@ host.port
+      ansible_user: #@ host.user
+      #@ if/end hasattr(host, "identity_file"):
+      ansible_ssh_private_key_file: #@ host.identity_file
+      #@ if/end hasattr(host, "sudo_password"):
+      ansible_become_password: #@ host.sudo_password
+    #@ end
+
+worker:
+  hosts:
+    #@ for host in data.values.hosts.worker:
+    (@= host.name @):
+      ansible_host: #@ host.hostname
+      #@ if/end hasattr(host, "port"):
+      ansible_port: #@ host.port
+      ansible_user: #@ host.user
+      #@ if/end hasattr(host, "identity_file"):
+      ansible_ssh_private_key_file: #@ host.identity_file
+      #@ if/end hasattr(host, "sudo_password"):
+      ansible_become_password: #@ host.sudo_password
+    #@ end
+
+all:
+  vars:
+    swarm:
+      default_address_pool:
+        base: #@ data.values.swarm.default_address_pool.base
+        size: #@ data.values.swarm.default_address_pool.size
+
+    ansible_python_interpreter: #@ data.values.ansible.python_interpreter
+
+    domain: #@ data.values.domain
+
+    tls:
+      enabled: #@ data.values.tls.enabled
+      acme:
+        email: #@ data.values.tls.acme.email
+
+    basic_auth:
+      enabled: #@ data.values.basic_auth.enabled
+      username: #@ data.values.basic_auth.username
+      password: #@ data.values.basic_auth.password
+
+    image:
+      registry: #@ data.values.image.registry
+      tag: #@ data.values.image.tag
+      webserver: #@ data.values.image.webserver
+      apiserver: #@ data.values.image.apiserver
+      cli: #@ data.values.image.cli
+
+    registries:
+    #@ for registry in data.values.registries:
+    - url: #@ registry.url
+      username: #@ registry.username
+      password: #@ registry.password
+    #@ end
+
+    webserver:
+      replica_count: #@ data.values.webserver.replica_count
+
+    worker:
+      replica_count: #@ data.values.worker.replica_count
+
+    apiserver:
+      replica_count: #@ data.values.apiserver.replica_count
+
+    config:
+      app:
+        name: #@ data.values.config.app.name
+        key: #@ data.values.config.app.key
+        env: #@ data.values.config.app.env
+        debug: #@ data.values.config.app.debug
+        url: #@ data.values.config.app.url
+
+      server:
+        api:
+          url: #@ data.values.config.server.api.url
+
+      session:
+        driver: #@ data.values.config.session.driver
+
+      broadcast:
+        driver: #@ data.values.config.broadcast.driver
+
+      cache:
+        driver: #@ data.values.config.cache.driver
+
+      sentry:
+        dns: #@ data.values.config.sentry.dns
+
+      log:
+        channel: #@ data.values.config.log.channel
+
+      filesystem:
+        driver: #@ data.values.config.filesystem.driver
+
+      queue:
+        connection: #@ data.values.config.queue.connection
+
+      mail:
+        mailer: #@ data.values.config.mail.mailer
+        host: #@ data.values.config.mail.host
+        port: #@ data.values.config.mail.port
+        username: #@ data.values.config.mail.username
+        password: #@ data.values.config.mail.password
+        encryption: #@ data.values.config.mail.encryption
+
+      slack:
+        token: #@ data.values.config.slack.token
+        workspace: #@ data.values.config.slack.workspace
+        botID: #@ data.values.config.slack.botID
+        signingSecret: #@ data.values.config.slack.signingSecret
+        superAminID: #@ data.values.config.slack.superAminID
+
+    extra_env_vars: #@ data.values.extra_env_vars
+
+    php: #@ data.values.php
+
+    phpfpm: #@ data.values.phpfpm
+
+    mariadb:
+      extra_args: #@ data.values.mariadb.extra_args
+      database: #@ data.values.mariadb.database
+      username: #@ data.values.mariadb.username
+      password: #@ data.values.mariadb.password
+      root_password: #@ data.values.mariadb.root_password
+      random_root_password: #@ data.values.mariadb.random_root_password
+
+    data_dir: #@ data.values.data_dir

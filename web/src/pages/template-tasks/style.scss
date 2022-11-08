@@ -1,0 +1,36 @@
+.TemplateTaskList {
+  thead[class*="ant-table-thead"] th {
+    background-color: #bae8e8 !important;
+  }
+
+  .ant-input:hover,
+  .ant-input:focus {
+    border: none;
+  }
+
+  .searchAdd {
+    display: flex;
+    align-items: center;
+  }
+
+  .icon {
+    font-size: 18px !important;
+    font-weight: 600;
+
+  }
+
+  .ant-btn:hover,
+  .ant-btn:focus {
+    color: black;
+    border-color: #d9d9d9;
+  }
+
+  .ant-btn {
+    color: black;
+  }
+
+  .ant-table-cell a {
+    width: 100%;
+    overflow: hidden;
+  }
+}

@@ -1,0 +1,127 @@
+.tree-node {
+  .text{
+    margin: 0;
+    padding: 0;
+  }
+ 
+  margin: 20px 0;
+  .textA {
+    pointer-events: none;
+    cursor: not-allowed;
+  }
+  .input_edit {
+    outline: none;
+    border-bottom: 1px solid #888;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+  .root {
+    align-items: center;
+    display: grid;
+    grid-template-columns: auto auto 1fr auto auto;
+    height: 32px;
+    padding-inline-end: 8px;
+    width: 250px;
+  }
+  .ant-row {
+    width: 100% !important;
+  }
+  .expandIconWrapper {
+    align-items: center;
+    font-size: 0;
+    cursor: pointer;
+    display: flex;
+    height: 24px;
+    justify-content: center;
+    width: 24px;
+    transition: transform linear 0.1s;
+    transform: rotate(0deg);
+  }
+
+  .expandIconWrapper.isOpen {
+    transform: rotate(90deg);
+  }
+
+  .labelGridItem {
+    padding-inline-start: 8px;
+  }
+
+  .actionButton {
+    padding: 0 4px;
+  }
+  .labelGridItem {
+    padding-inline-start: 8px;
+  }
+
+  .inputWrapper {
+    align-items: center;
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    justify-content: flex-start;
+  }
+
+  .textField input {
+    font-size: 14px;
+    padding: 6px 0;
+  }
+
+  .editButton {
+    padding: 6px;
+  }
+
+  .editIcon {
+    font-size: 20px;
+  }
+
+  .nodeInput {
+    width: 200px;
+  }
+
+  .nodeLabel {
+    padding-right: 15px;
+  }
+  .item-task {
+    .ant-slider-track {
+      background-color: rgb(197, 196, 135);
+      height: 20px;
+    }
+    .ant-slider-handle {
+      display: none;
+    }
+    .ant-slider-track:hover {
+      background-color: rgb(197, 196, 135);
+      opacity: 0.7;
+    }
+  }
+  .item-invalid{
+    .ant-slider-track {
+      background-color: red;
+      height: 20px;
+    }
+    .ant-slider-handle {
+      display: none;
+    }
+    .ant-slider-track:hover {
+      background-color: red;
+      opacity: 0.7;
+    }
+  }
+  .inputValue{
+    position: absolute;
+    top: 50%;
+    left: 98%;
+    transform: translateY(-25%);
+    border: 2px solid rgb(197, 196, 135);
+    padding: 0 15px;
+    border-radius: 5px;
+    width: 50px;
+    padding: 0 10px;
+    text-align: center;
+  }
+  
+}
+.tree {
+  li ul{
+    padding: 0 !important;
+  }
+}

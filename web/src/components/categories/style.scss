@@ -1,0 +1,37 @@
+.list-category {
+  .ant-table-row:hover {
+    cursor: default;
+  }
+
+  h1 {
+    margin-left: 0px;
+  }
+  .ant-select-arrow {
+    display: flex;
+    justify-items: center;
+    align-self: center;
+    align-items: center;
+  }
+  // list
+  .ant-table-thead > tr > * {
+    background-color: #bae8e8 !important;
+    font-size: 16px;
+  }
+
+  .ant-table-pagination-right {
+    justify-content: center;
+  }
+
+  .ant-pagination-options-size-changer.ant-select {
+    display: none;
+  }
+
+  .ant-table-container {
+    position: relative;
+  }
+
+  // add form
+  .ant-form-item-required::after {
+    display: none;
+  }
+}

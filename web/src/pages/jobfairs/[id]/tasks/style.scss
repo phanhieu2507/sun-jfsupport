@@ -1,0 +1,189 @@
+.TaskList {
+  thead[class*="ant-table-thead"] th {
+    background-color: #bae8e8 !important;
+  }
+
+  .anticon .anticon-filter {
+    color: black;
+  }
+
+  .label-sl {
+    display: flex;
+    flex-direction: column;
+  }
+
+  h1 {
+    font-size: 40px;
+    margin-left: 0px;
+    margin-bottom: 0px;
+    color: #272343;
+  }
+
+  .listMember {
+    .anticon {
+      font-size: 11px !important;
+    }
+  }
+
+  .anticon {
+    font-size: 16px !important;
+  }
+
+  .icon {
+    font-size: 18px !important;
+    font-weight: 600;
+  }
+
+  .searchAdd {
+    display: flex;
+    align-items: center;
+  }
+
+  .demo-option-label-item>span {
+    margin-right: 6px;
+  }
+
+  .save {
+    width: 100%;
+    margin-top: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+
+  .ant-tag {
+    display: flex;
+    align-items: center;
+  }
+
+  .ant-select-selector {
+    display: flex;
+    align-items: center;
+  }
+
+  hr {
+    border-top: 2px solid #dcdcdc;
+  }
+
+  .task-managers {
+    display: grid;
+    grid-template-columns: auto 20%;
+    align-items: center;
+  }
+
+  .radio-button {
+    border-radius: 5px;
+    width: 4.7rem;
+    height: 38px;
+    line-height: 38px;
+    margin: 0 0.5rem;
+
+    span {
+      color: white;
+    }
+  }
+
+  .radio-button:hover {
+    opacity: 0.8;
+  }
+
+  .radio-button:nth-child(1) {
+    background-color: yellow;
+    border-right-color: yellow !important;
+
+    span {
+      color: black;
+    }
+  }
+
+  .radio-button:nth-child(2) {
+    background-color: #5eb5a6;
+  }
+
+  .radio-button:nth-child(3) {
+    background-color: #a1af2f;
+  }
+
+  .radio-button:nth-child(4) {
+    background-color: #4488c5;
+  }
+
+  .radio-button:nth-child(5) {
+    background-color: #b95656;
+  }
+
+  .radio-button:nth-child(6) {
+    background-color: #795617;
+  }
+
+  .ant-radio-group {
+    display: flex !important;
+  }
+
+  .ant-radio-button-wrapper:last-child {
+    border: none;
+  }
+
+  .ant-radio-button-wrapper:first-child {
+    border: none;
+  }
+
+  .ant-radio-button-wrapper:not(:first-child)::before {
+    display: none;
+  }
+
+  .ant-radio-button-wrapper {
+    border-radius: 5px;
+    height: 40px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 10px !important;
+  }
+
+  .ant-radio-group-solid .ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled) {
+    background-color: white;
+    color: #272343;
+    border: 1px solid yellow;
+
+    span {
+      color: #272343;
+    }
+  }
+
+  ul,
+  li {
+    list-style-type: disc;
+  }
+}
+
+.task-children {
+  margin-left: 1.8rem !important;
+  padding-left: 1rem !important;
+  border-left: 2px solid gray;
+}
+
+.ant-table-cell a {
+  width: 100%;
+  overflow: hidden;
+}
+
+.ant-badge-status-dot {
+  width: 10px !important;
+  height: 10px !important;
+}
+
+.company-name {
+  color: gray;
+  padding-top: 0.5em;
+  padding-left: 3em;
+  opacity: 0.8;
+
+  &__children {
+    color: gray;
+    padding-top: 0.5em;
+    padding-left: 6.5em;
+    opacity: 0.8;
+  }
+}

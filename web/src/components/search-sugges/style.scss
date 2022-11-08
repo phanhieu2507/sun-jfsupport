@@ -1,0 +1,22 @@
+.suggestion {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: #fff;
+  padding: 5px;
+  z-index: 999;
+}
+.search-sugges {
+  display: flex;
+  align-items: flex-start;
+  input {
+    height: 40px;
+  }
+}
+
+.react-autosuggest__suggestions-container.react-autosuggest__suggestions-container--open {
+  background: #ccc;
+  z-index: 1000;
+  position: absolute;
+  border-radius: 5px;
+}

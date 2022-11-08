@@ -1,0 +1,67 @@
+hosts:
+  manager:
+  - name: localhost
+    hostname: 127.0.0.1
+    # port: 22
+    user:
+    # identity_file: ~/.ssh/id_rsa
+    # sudo_password: secret
+  worker: []
+
+swarm:
+  # default_address_pool:
+  #   base: 10.0.0.0/8
+  #   size: 24
+
+registries:
+- url: harbor.sun-asterisk.vn
+  username: username
+  password: password
+
+domain: jobfair.local
+
+tls:
+  enabled: false
+  acme:
+    email:
+
+basic_auth:
+  enabled: false
+  username: user
+  password: secret
+
+image:
+  tag: develop
+
+webserver:
+  replica_count: 1
+
+worker:
+  replica_count: 1
+
+apiserver:
+  replica_count: 1
+
+config:
+  app:
+    key:
+    url: http://jobfair.local
+    env: production
+
+  sentry:
+    dns:
+
+  mail:
+    username:
+    password:
+
+mariadb:
+  password: secret
+  root_password: root
+  random_root_password: no
+
+extra_env_vars: {}
+
+php: {}
+
+phpfpm: {}

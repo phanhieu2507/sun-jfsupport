@@ -1,0 +1,131 @@
+.container__column {
+  width: 500px;
+  height: 72vh;
+  display: flex;
+  flex-direction: column;
+  &:not(:last-child) {
+    margin-right: 10px;
+  }
+
+  &--list {
+    transition: background-color 0.2s ease;
+    background-color: white;
+    flex-grow: 1;
+    min-height: 200px;
+    overflow-y: scroll;
+    margin-top: 10px;
+
+    &.未着手::-webkit-scrollbar-thumb {
+      background-color: #5eb5a6;
+    }
+    &.進行中::-webkit-scrollbar-thumb {
+      background-color: #a1af2f;
+    }
+    &.完了::-webkit-scrollbar-thumb {
+      background-color: #4488c5;
+    }
+    &.中断::-webkit-scrollbar-thumb {
+      background-color: rgb(185, 86, 86);
+    }
+    &.未完了::-webkit-scrollbar-thumb {
+      background-color: rgb(121, 86, 23);
+    }
+  }
+  &--task {
+    // border: 1px solid lightgrey;
+    border-radius: 2px;
+    background-color: white;
+  }
+  .ant-btn {
+    padding: 4px 6px !important;
+  }
+  .ant-card {
+    &__bordered {
+      &--未着手 {
+        border-radius: 6px !important;
+        border-left: 4px solid #5eb5a6 !important;
+        border-top: 1px solid #5eb5a6 !important;
+        border-right: 1px solid #5eb5a6 !important;
+        border-bottom: 1px solid #5eb5a6 !important;
+      }
+      &--進行中 {
+        border-radius: 6px !important;
+        border-left: 4px solid #a1af2f !important;
+        border-top: 1px solid #a1af2f !important;
+        border-right: 1px solid #a1af2f !important;
+        border-bottom: 1px solid #a1af2f !important;
+      }
+      &--完了 {
+        border-radius: 6px !important;
+        border-left: 4px solid #4488c5 !important;
+        border-top: 1px solid #4488c5 !important;
+        border-right: 1px solid #4488c5 !important;
+        border-bottom: 1px solid #4488c5 !important;
+      }
+      &--中断 {
+        border-radius: 6px !important;
+        border-left: 4px solid rgb(185, 86, 86) !important;
+        border-top: 1px solid rgb(185, 86, 86) !important;
+        border-right: 1px solid rgb(185, 86, 86) !important;
+        border-bottom: 1px solid rgb(185, 86, 86) !important;
+      }
+      &--未完了 {
+        border-radius: 6px !important;
+        border-left: 4px solid rgb(121, 86, 23) !important;
+        border-top: 1px solid rgb(121, 86, 23) !important;
+        border-right: 1px solid rgb(121, 86, 23) !important;
+        border-bottom: 1px solid rgb(121, 86, 23) !important;
+      }
+    }
+  }
+
+  .ant-card-body {
+    padding: 10px 10px !important;
+  }
+
+  /* icon position */
+  .anticon {
+    display: inline-flex !important;
+  }
+
+  /* more info */
+  .moreInfo {
+    height: 26px !important;
+    padding: 0px 4px !important;
+  }
+
+  /* memo */
+  .memo {
+    color: white !important;
+    height: 26px !important;
+    padding: 0px 8px !important;
+    &--未着手 {
+      background: #5eb5a6 !important;
+      border-color: #5eb5a6 !important;
+    }
+    &--進行中 {
+      background: #a1af2f !important;
+      border-color: #a1af2f !important;
+    }
+    &--完了 {
+      background: #4488c5 !important;
+      border-color: #4488c5 !important;
+    }
+    &--中断 {
+      background: rgb(185, 86, 86) !important;
+      border-color: rgb(185, 86, 86) !important;
+    }
+    &--未完了 {
+      background: rgb(121, 86, 23) !important;
+      border-color: rgb(121, 86, 23) !important;
+    }
+  }
+
+  /* user and time */
+  .user {
+    height: 26px !important;
+    margin-bottom: 4px;
+    padding: 0px 4px;
+  }
+}
+/* card */

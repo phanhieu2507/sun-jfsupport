@@ -1,0 +1,14 @@
+.css_all {
+  .member_table {
+    border: 1px solid rgba(173, 171, 171, 0.5);
+    border-radius: 5px;
+  }
+
+  .border_gray {
+    @apply border-blue-900;
+  }
+  
+  img {
+    box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.2);
+  }
+}

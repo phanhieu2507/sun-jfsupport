@@ -1,0 +1,45 @@
+.app {
+  .task.task {
+    @apply mt-8;
+  }
+
+  .on-mounted {
+    visibility: visible;
+    opacity: 1;
+    height: auto;
+    transition: opacity ease-in-out 500ms;
+  }
+
+  #swiper {
+    .swiper-slide {
+      box-shadow: 0 0 5px;
+    }
+  }
+
+  .swiper_category {
+    .swiper-slide {
+      min-width: 72px !important;
+    }
+  }
+  .text-ellipsis {
+    text-overflow: ellipsis;
+  }
+  .task-hover {
+    box-shadow: 0 0 3px;
+    &:hover {
+      border-color: #ffd803;
+    }
+  }
+
+  .gantt-chart:hover {
+    color: #ffd803;
+  }
+
+  ul,
+  li {
+    list-style-type: disc;
+  }
+}
+.swiper-button-disabled {
+  display: none !important;
+}

@@ -1,0 +1,106 @@
+---
+- hosts: manager[0]
+  name: Deploy stacks
+  vars:
+    traefik_entrypoint: "{% if tls.enabled %}https{% else %}http{% endif %}"
+    webserver_image: "{{ image.registry }}/{{ image.webserver }}:{{ image.tag }}"
+    apiserver_image: "{{ image.registry }}/{{ image.apiserver }}:{{ image.tag }}"
+    cli_image: "{{ image.registry }}/{{ image.cli }}:{{ image.tag }}"
+  tasks:
+  - import_tasks: tasks/configure-python.yml
+
+  - import_tasks: tasks/docker-login.yml
+
+  - name: Ensure docker images are up-to-date
+    docker_image:
+      name: "{{ item.name }}"
+      source: pull
+      state: present
+    when: item.when | default(true)
+    loop:
+    - name: traefik:2.3
+    - name: redis:alpine
+    - name: mariadb:10
+    - name: sunasteriskrnd/db-backup:latest
+    - name: "{{ webserver_image }}"
+    - name: "{{ apiserver_image }}"
+    - name: "{{ cli_image }}"
+
+  - name: Ensure traefik network exist
+    docker_network:
+      name: traefik
+      driver: overlay
+
+  - name: Ensure data dirs exist and have correct permission
+    become: true
+    file:
+      path: "{{ data_dir }}/{{ item.path }}"
+      state: directory
+      owner: "{{ item.owner }}"
+      group: "{{ item.group }}"
+      mode: "{{ item.mode | default('0755') }}"
+    when: item.when | default(true)
+    loop:
+    - path: jfs/mariadb
+      owner: "999"
+      group: "0"
+    - path: jfs/redis
+      owner: "999"
+      group: "0"
+    - path: jfs/db-backup
+      owner: "999"
+      group: "0"
+    - path: traefik/logs
+      owner: "0"
+      group: "0"
+    - path: traefik/acme
+      owner: "0"
+      group: "0"
+    - path: jfs/storage/app/public
+      owner: "82"
+      group: "82"
+
+  - name: Set deployment UUID
+    set_fact:
+      uuid: "{{ 9999 | random | to_uuid }}"
+
+  - name: Create basic auth string
+    become: true
+    htpasswd:
+      create: yes
+      name: "{{ basic_auth.username }}"
+      password: "{{ basic_auth.password }}"
+      path: "{{ data_dir }}/traefik/jfs.htpasswd"
+      state: present
+    when: basic_auth.enabled
+
+  - name: Prepare docker-compose files
+    template:
+      src: stacks/{{ item.stack }}.yml
+      dest: /tmp/compose.{{ uuid }}.{{ item.stack }}.yml
+    when: item.when | default(true)
+    loop:
+    - stack: traefik
+    - stack: jobfair
+
+  - block:
+    - name: Deploy stacks
+      docker_stack:
+        name: "{{ item.stack }}"
+        compose: /tmp/compose.{{ uuid }}.{{ item.stack }}.yml
+        prune: true
+      when: item.when | default(true)
+      loop:
+      - stack: traefik
+      - stack: jobfair
+
+    always:
+    - name: Clean up temporary files
+      file:
+        path: /tmp/compose.{{ uuid }}.{{ item.stack }}.yml
+        state: absent
+      no_log: true
+      when: item.when | default(true)
+      loop:
+      - stack: traefik
+      - stack: jobfair

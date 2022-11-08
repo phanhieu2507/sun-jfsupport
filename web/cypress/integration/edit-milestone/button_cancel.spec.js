@@ -1,0 +1,63 @@
+describe('check button cancel', () => {
+  beforeEach(() => {
+    cy.visit('http://jobfair.local:8000/milestones/1/edit')
+    cy.wait(500)
+  })
+
+  it('check button cancel always be enabled', () => {
+    cy.get('#basic_name').clear()
+    cy.get('#basic_time').clear()
+    cy.get('[type="button"]').should('not.be.disabled')
+    cy.get('#basic_name').type('abcv')
+    cy.get('#basic_time').type('3')
+    cy.get('[type="button"]').should('not.be.disabled')
+  })
+
+  it('check modal when click cancel button', () => {
+    cy.get('[type="button"]').click()
+    cy.get('.ant-modal-content').should('be.visible')
+    cy.get('.ant-modal-body').should('contain', '変更内容が保存されません。よろしいですか？')
+    cy.get('.ant-modal-content').within(() => {
+      cy.get('.ant-btn').first().should('be.visible').should('contain', 'いいえ')
+      cy.get('.ant-btn').last().should('be.visible').should('contain', 'はい')
+    })
+  })
+
+  it('check when click outside the modal', () => {
+    const arr = []
+    cy.get('#basic_name').invoke('val')
+      .then((sometext) => { arr.push(sometext) })
+    cy.get('#basic_time').invoke('val')
+      .then((sometext) => { arr.push(sometext) })
+    cy.get('.ant-select-selection-item').invoke('text').then((sometext) => { arr.push(sometext) })
+    cy.get('[type="button"]').click()
+    cy.get('body').click(0, 0)
+    cy.get('.ant-modal-root').should('not.be.visible')
+    cy.get('#basic_name').invoke('val')
+      .then((sometext) => {
+        expect(sometext).to.equal(arr[0])
+      })
+    cy.get('#basic_time').invoke('val')
+      .then((sometext) => { expect(sometext).to.equal(arr[1]) })
+    cy.get('.ant-select-selection-item').invoke('text')
+      .then((sometext) => { expect(sometext).to.equal(arr[2]) })
+  })
+
+  it('check when button no of the modal', () => {
+    const arr = []
+    cy.get('#basic_name').invoke('val')
+      .then((sometext) => { arr.push(sometext) })
+    cy.get('#basic_time').invoke('val')
+      .then((sometext) => { arr.push(sometext) })
+    cy.get('.ant-select-selection-item').invoke('text').then((sometext) => { arr.push(sometext) })
+    cy.get('[type="button"]').click()
+    cy.get('.ant-modal-content').find('.ant-btn').first().click()
+    cy.get('.ant-modal-root').should('not.be.visible')
+    cy.get('#basic_name').invoke('val')
+      .then((sometext) => { expect(sometext).to.equal(arr[0]) })
+    cy.get('#basic_time').invoke('val')
+      .then((sometext) => { expect(sometext).to.equal(arr[1]) })
+    cy.get('.ant-select-selection-item').invoke('text')
+      .then((sometext) => { expect(sometext).to.equal(arr[2]) })
+  })
+})

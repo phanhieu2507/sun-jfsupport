@@ -1,0 +1,193 @@
+.add-template-task-page {
+  /* https://www.happyhues.co/palettes/14 */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: #272343;
+  }
+
+  p {
+    color: #2d334a;
+    margin-bottom: 0px;
+  }
+
+  .ant-form-horizontal .ant-form-item-label {
+    // text-align: right;
+    margin-right: 16px;
+    min-width: 155px;
+    font-weight: 700;
+  }
+
+  .ant-tag,
+  .ant-tag a,
+  .ant-tag a {
+    color: rgb(16, 85, 189);
+  }
+
+  .ant-tag > .anticon + span,
+  .ant-tag > span + .anticon {
+    padding: 1px;
+    margin-left: 7px;
+    font-size: 11px;
+    transform: translateY(-8px);
+    border-radius: 100%;
+  }
+
+  .ant-tag > .anticon + span,
+  .ant-tag > span + .anticon:hover {
+    background-color: gray;
+    border: 1px solid black;
+  }
+
+  .add-template-form {
+    width: 100%;
+  }
+
+  //   .task {
+  //     .ant-col-13 {
+  //       width: 100%;
+  //       margin-left: 0;
+  //     }
+  //     .ant-col-6 {
+  //       margin-right: 0;
+  //     }
+  //   }
+  .ant-form-item-control-input{
+    margin: 0px 16px;
+  }
+
+  .center-container {
+    width: 66%;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .space-items-special {
+    .ant-space-item:nth-child(2) {
+      width: 100%;
+    }
+
+    .ant-space-item:nth-child(1) {
+      width: 33%;
+    }
+  }
+  .slash-devider {
+    padding: 0 5px;
+    margin: 0;
+  }
+
+  .ant-form-item-label > label,
+  .label {
+    color: #272343;
+  }
+
+  #loading {
+    position: relative;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+  }
+
+  // .ant-form-item-control-input-content {
+  //   max-width: 8%;
+  // }
+  .ant-form-item {
+    margin: 10px 10px;
+  }
+
+  .ant-col-13 {
+    min-width: 300px;
+    width: 100%;
+    // margin: 0px 8px;
+    max-width: 100%;
+  }
+
+  .ant-col-6 {
+    // flex: 0 0 100%;
+    max-width: 100%;
+  }
+
+  .ant-row {
+    flex-flow: nowrap;
+    padding-bottom: 26px;
+  }
+
+  .ant-spin-nested-loading > div > .ant-spin {
+    position: fixed;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    z-index: 4;
+    display: block;
+    width: 100%;
+    height: 100%;
+    max-height: 400px;
+  }
+
+  .ant-form-item-label > label,
+  .label {
+    color: #272343;
+    text-align: start;
+  }
+
+  .ant-spin-nested-loading > div > .ant-spin-lg .ant-spin-dot {
+    font-size: 30px;
+    color: #ffd803;
+  }
+
+  .w-md-editor-toolbar li > button {
+    height: 40px !important;
+    width: 40px !important;
+  }
+  .w-md-editor-toolbar {
+    height: 40px !important;
+  }
+  .ant-form-item-label > label::after {
+    margin: 0px;
+  }
+  .preview_btn {
+    background-color: #82f0cc !important;
+  }
+  .preview_btn:hover {
+    background-color: #72d8c8 !important;
+  }
+  .des {
+    padding: 10px;
+    border: 1px solid #b5b5b8;
+    border-radius: 6px;
+    height: 300px;
+    overflow: auto;
+  }
+  .list__task {
+    display: flex;
+    align-items: center;
+    height: auto;
+    width: 100%;
+    // border: 1px solid #d9d9d9;
+    box-shadow: 2px #b5b5b8;
+    margin: 0 5px;
+    border-radius: 5px;
+    flex-wrap: wrap;
+    li {
+      white-space: nowrap;
+      padding: 2px;
+    }
+    .ant-tag,
+    .ant-tag a,
+    .ant-tag a {
+      color: rgb(16, 85, 189);
+    }
+  }
+  .ant-input-lg {
+    height: 40px;
+  }
+  .ant-form-item-explain-error {
+    margin-left: 15px;
+    margin-top: 5px;
+  }
+}

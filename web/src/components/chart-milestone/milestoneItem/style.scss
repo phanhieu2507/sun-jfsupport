@@ -1,0 +1,21 @@
+.milestone__Item {
+    margin-bottom: 15px;
+    .Mile__title {
+        h5 {
+            color: #2d334a;
+        }
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    .chart__stt {
+        width: 100%;
+    }
+}
+
+.mile__name {
+    width: 75%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}

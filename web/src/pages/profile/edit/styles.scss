@@ -1,0 +1,48 @@
+.container__profile-edit {
+
+  .container-profile {
+    margin-top: 5rem;
+    display: flex;
+    // justify-content: space-between;
+    margin-left: 15%;
+    p {
+      margin: auto;
+  }
+}
+
+  .container-form {
+    margin: auto; 
+    height: 7.5cm;
+    width: 60%;
+    border: 2px solid #ccc!important;
+    margin-left: 4rem;
+  }
+  
+  .container-btn {
+    margin-top: 2rem;
+    display: flex;
+    // width: 83%;
+    p {
+      margin: auto;
+    }
+  }
+
+.avatar{
+  img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+  
+  .ant-upload-list-item-info {
+    display: none;
+  }
+  img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    display: block;
+  }
+}
+}

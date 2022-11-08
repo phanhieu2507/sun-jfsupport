@@ -1,0 +1,61 @@
+.container-list {
+  background-color: white;
+
+
+  .ant-table-thead > tr > * {
+    background-color: #bae8e8 !important;
+    
+  }
+
+  .ant-table-pagination-right {
+    margin-top: 2.5rem !important;
+    justify-content: center !important;
+  }
+  .container-button {
+    display: flex !important;
+    & > button {
+      justify-content: flex-end !important;
+    }
+  }
+  tr th:nth-child(1),
+  tr td:nth-child(1) {
+    text-align: left;
+  }
+  .ant-pagination-options {
+    display: none !important;
+  }
+
+  .ant-modal-wrap {
+    transform: translateY(210px);
+  }
+  .searchAdd{
+    display: flex;
+    align-items: center;
+  }
+  .ant-layout-content {
+    margin: 15px 16px !important;
+  }
+
+  .ant-select-selector {
+    width: 35px;
+    height: 38px !important;
+    border-radius: 6px !important;
+    display: flex;
+    align-items: center;
+  }
+  .ant-btn-primary {
+    border-color: #ffd803;
+    background-color: #ffd803;
+    color: rgba(0, 0, 0, 0.85);
+
+    &:hover {
+      color: rgba(0, 0, 0, 0.85);
+    }
+  }
+
+  .ant-btn:hover,
+  .ant-btn:focus {
+    color: #ffd803;
+    border-color: #ffd803;
+  }
+}

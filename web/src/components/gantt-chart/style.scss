@@ -1,0 +1,97 @@
+.gantt-chart_G1-3 {
+  .ant-input-affix-wrapper:focus, body .ant-input-affix-wrapper-focused {
+    border: none !important;
+  }
+  height: fit-content;
+  max-height: 700px;
+  .gantt_row{
+    border-bottom: 1px solid #EBEBEB;
+  }
+  .gantt_task_row{
+    border-bottom: 1px solid #EBEBEB;
+
+  }
+  .milestone-row {
+    font-size: 17px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: inline-block;
+    white-space: nowrap;
+  }
+  .task-column {
+    width: 100%;
+
+    // border: 1px solid rgb(53, 53, 53);
+  }
+
+  .gantt_link_target .gantt_link_control div,
+  .gantt_task_line.gantt_drag_move .gantt_link_control div,
+  .gantt_task_line.gantt_drag_move .gantt_task_drag,
+  .gantt_task_line.gantt_drag_move .gantt_task_progress_drag,
+  .gantt_task_line.gantt_drag_progress .gantt_link_control div,
+  .gantt_task_line.gantt_drag_progress .gantt_task_drag,
+  .gantt_task_line.gantt_drag_progress .gantt_task_progress_drag,
+  .gantt_task_line.gantt_drag_resize .gantt_link_control div,
+  .gantt_task_line.gantt_drag_resize .gantt_task_drag,
+  .gantt_task_line.gantt_drag_resize .gantt_task_progress_drag,
+  .gantt_task_line.gantt_selected .gantt_link_control div,
+  .gantt_task_line.gantt_selected .gantt_task_drag,
+  .gantt_task_line.gantt_selected .gantt_task_progress_drag,
+  .gantt_task_line:hover .gantt_link_control div,
+  .gantt_task_line:hover .gantt_task_drag,
+  .gantt_task_line:hover .gantt_task_progress_drag {
+    display: none;
+  }
+  .gantt_marker.today {
+    z-index: 0;
+    background: rgb(133, 127, 127);
+    background: linear-gradient(
+      141deg,
+      rgba(133, 127, 127, 0.9704879589295119) 0%,
+      rgba(255, 0, 221, 0.3890272847722086) 0%
+    );
+    width: 44px;
+    opacity: 0.5;
+  }
+
+  .gantt_marker .gantt_marker_content {
+    color: black;
+  }
+  .hideTask {
+    display: none;
+  }
+  .gantt_task_line.gantt_task_inline_color {
+    z-index: 1;
+  }
+
+  .milestone-cell {
+    width: 88px;
+    position: absolute;
+    left: calc(44px * 4);
+    z-index: 999;
+    background: rgb(81, 255, 0);
+    border: 1px solid rgb(185, 36, 36);
+  }
+
+  .today-mark {
+    background-color: blueviolet;
+  }
+  .gantt_grid_data .gantt_cell {
+    padding: 0;
+  }
+  .task-detail {
+    overflow: hidden;
+    width: 26ch;
+    text-overflow: ellipsis;
+  }
+}
+.ant-avatar-group {
+  padding: 5px;
+}
+.avt_hover{
+  display: none;
+  z-index: 9999999;
+}
+.avt_hover:hover{
+  display: block;
+}

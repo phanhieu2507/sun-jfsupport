@@ -1,0 +1,68 @@
+.template-task-dt {
+  ::-webkit-scrollbar {
+    width: 12px !important;
+    height: 12px !important;
+  }
+  .list__button {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+
+    .button__right {
+      button {
+        margin-left: 15px;
+      }
+    }
+  }
+
+  .info__tplt {
+    span {
+      padding-right: 10px;
+      margin-right: 5px;
+    }
+  }
+
+  .list__task {
+    display: flex;
+    align-items: center;
+    height: auto;
+    width: 100%;
+    // border: 1px solid #d9d9d9;
+    box-shadow: 2px #b5b5b8;
+    margin: 0 5px;
+    border-radius: 5px;
+    flex-wrap: wrap;
+    li {
+      white-space: nowrap;
+      padding: 2px;
+    }
+    .ant-tag,
+    .ant-tag a,
+    .ant-tag a {
+      color: rgb(16, 85, 189);
+    }
+  }
+
+  .des {
+    padding: 10px;
+    border: 1px solid #b5b5b8;
+    border-radius: 6px;
+    height: 300px;
+    overflow: auto;
+  }
+
+  .list-items {
+    a:hover {
+      color: #ffd803;
+    }
+  }
+
+  ul,
+  li {
+    list-style-type: disc;
+  }
+}
+.Editor {
+	margin-top : 30px;
+}

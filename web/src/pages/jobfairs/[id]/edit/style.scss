@@ -1,0 +1,49 @@
+.edit__jf {
+  .ant-form-item-label {
+    text-align: right;
+  }
+
+  .button_cacel {
+    background-color: white !important;
+    border: 1px solid rgb(224, 222, 222) !important;
+  }
+
+  .button_cacel:hover {
+    color: #ffd803 !important;
+    border: 1px solid #ffd803 !important;
+  }
+
+  .ant-form-item-label {
+    margin-right: 1rem;
+    min-width: 115px;
+  }
+
+  p {
+    margin-bottom: 0px;
+  }
+
+  .ant-form-horizontal .ant-form-item-label {
+    text-align: end;
+    margin: 0px 16px;
+  }
+
+  div.ant-select
+    .ant-select-lg
+    .addJF-selector
+    .ant-select-single
+    .ant-select-show-arrow,
+  div.ant-form-item-control-input-content {
+    margin: 0px 16px;
+  }
+
+  .ant-form-item-label > label::after {
+    margin: 0px;
+  }
+
+  .ant-picker {
+    width: 100%;
+  }
+  .ant-form-item-explain-error {
+    padding-left: 20px;
+  }
+}

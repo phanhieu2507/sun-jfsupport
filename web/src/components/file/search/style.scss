@@ -1,0 +1,23 @@
+.FileSelectBox {
+  .ant-select-arrow .anticon {
+    font-size: 15px;
+  }
+}
+.FileModal {
+  .ant-modal-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .ant-table-thead > tr > * {
+    font-weight: 700;
+  }
+  .table-top {
+    background-color: #e3f6f5;
+  }
+}
+.FileButton {
+  width: 80%;
+}
+.search-form {
+}

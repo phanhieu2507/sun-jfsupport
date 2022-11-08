@@ -1,0 +1,131 @@
+.add-jf-schedule {
+
+  /* https://www.happyhues.co/palettes/14 */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: #272343;
+  }
+
+  p {
+    color: #2d334a;
+
+    margin-bottom: 0px;
+  }
+
+  .input-name {
+    background-color: #bae8e8;
+    min-width: 100px;
+  }
+
+  .input-name:focus {
+    border: none;
+  }
+
+  .label {
+    min-width: 180px;
+  }
+
+  .demo-infinite-container {
+    height: 280px;
+    padding: 8px 24px;
+    overflow: auto;
+    border: 1px solid #e8e8e8;
+    border-radius: 4px;
+    background-color: '#e3f6f5';
+
+    .list-items {
+      border-bottom: 0.1px solid #d5d5d5;
+    }
+  }
+
+  .ant-form-horizontal .ant-form-item-control {
+    max-width: 100%;
+    min-width: 300px;
+  }
+
+  .ant-form-item {
+    margin-right: 8px;
+    margin-left: 30px;
+    margin-bottom: 19px;
+  }
+
+  .ant-form-item input,
+  .selector ::placeholder {
+    color: #272343;
+
+    // background-color: #e3f6f5;
+  }
+
+  .ant-select:not(.ant-select-customize-input) .ant-select-selector {
+    color: #272343;
+
+    // background-color: #e3f6f5;
+  }
+
+  .ant-form-item-has-error .ant-select:not(.ant-select-disabled):not(.ant-select-customize-input) .ant-select-selector {
+    color: #272343;
+
+    // background-color: #e3f6f5;
+  }
+
+  .addJF-selector {
+    background-color: transparent;
+  }
+
+  .ant-form-horizontal .ant-form-item-label {
+    text-align: end;
+    margin: 0px 16px;
+  }
+
+  .ant-form-item-label>label,
+  .label {
+    // font-size: 19px;
+    text-align: start;
+    color: #272343;
+  }
+
+  /* width */
+  ::-webkit-scrollbar {
+    width: 16px;
+    height: 16px;
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    border-radius: 100vh;
+    background: #edf2f7;
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #cbd5e0;
+    border-radius: 100vh;
+    border: 3px solid #edf2f7;
+  }
+
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #a0aec0;
+  }
+
+  div.ant-select .ant-select-lg .addJF-selector .ant-select-single .ant-select-show-arrow,
+  div.ant-form-item-control-input-content {
+    margin: 0px 16px;
+  }
+
+  .ant-form-item-label > label::after {
+    margin: 0px;
+  }
+
+  .ant-picker {
+    width: 100%;
+  }
+  .ant-form-item-explain-error {
+    margin-left: 15px;
+    margin-top: 5px;
+  }
+}

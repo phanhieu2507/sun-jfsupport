@@ -1,0 +1,87 @@
+#jinja2: trim_blocks:False
+
+version: '3.5'
+
+services:
+  traefik:
+    image: traefik:2.3
+    entrypoint:
+      - sh
+    command:
+      - -c
+      - |
+        cat <<EOF | tee /etc/traefik/traefik.toml && /entrypoint.sh traefik
+        [entryPoints]
+          [entryPoints.http]
+            address = ":80"
+        {% if tls.enabled %}
+            [entryPoints.http.http.redirections.entryPoint]
+            to = "https"
+        [entryPoints.https]
+          address = ":443"
+          [entryPoints.https.http.tls]
+            certResolver = "lets-encrypt"
+
+        [certificatesResolvers.lets-encrypt.acme]
+          email = "{{ tls.acme.email }}"
+          storage = "/etc/traefik/acme/acme.json"
+          [certificatesResolvers.lets-encrypt.acme.httpChallenge]
+            entryPoint = "http"
+        {% endif %}
+
+        [providers]
+          [providers.docker]
+            swarmMode = true
+            network = "traefik"
+            exposedByDefault = false
+
+        [log]
+          level = "info"
+          filepath = "/var/log/traefik/traefik.log"
+
+        [accessLog]
+          filepath = "/var/log/traefik/access.log"
+        EOF
+    ports:
+      - target: 80
+        published: 80
+        protocol: tcp
+        mode: host
+      - target: 443
+        published: 443
+        protocol: tcp
+        mode: host
+    networks:
+      - traefik
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - {{ data_dir }}/traefik/logs:/var/log/traefik
+      - {{ data_dir }}/traefik/acme:/etc/traefik/acme
+      {%if basic_auth.enabled %}
+      - {{ data_dir }}/traefik/jfs.htpasswd:/etc/traefik/jfs.htpasswd
+      {%endif %}
+    deploy:
+      mode: global
+      placement:
+        constraints:
+          - node.role == manager
+
+  logs:
+    image: blacklabelops/logrotate
+    environment:
+      LOGS_DIRECTORIES: /var/log/traefik
+      LOGROTATE_COPIES: 10
+      LOGROTATE_SIZE: 100M
+      LOGROTATE_LOGFILE: /var/log/logrotate/logrotate.log
+      LOGROTATE_CRONSCHEDULE: '* * * * *'
+    deploy:
+      mode: global
+      placement:
+        constraints:
+          - node.role == manager
+    volumes:
+      - {{ data_dir }}/traefik/logs:/var/log/traefik
+
+networks:
+  traefik:
+    external: true

@@ -1,0 +1,9 @@
+.add-jf-schedule{
+    .ant-form-item-label {
+        text-align: right;
+    }
+    .ant-form-item-label > label::after {
+        content: '';
+    }
+}
+

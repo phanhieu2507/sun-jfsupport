@@ -1,0 +1,9 @@
+---
+- name: Ensure docker registry credentials are configured
+  docker_login:
+    registry_url: "{{ item.url }}"
+    username: "{{ item.username }}"
+    password: "{{ item.password }}"
+    state: present
+  no_log: true
+  with_items: "{{ registries }}"

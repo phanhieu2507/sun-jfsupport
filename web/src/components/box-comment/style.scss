@@ -1,0 +1,110 @@
+.box-comment {
+  .box {
+    padding: 16px;
+    border: 1px solid #b5b5b8;
+  }
+  .pos {
+    padding: 20px 10px 10px 10px;
+    margin-top: 20px;
+  }
+  .pos-left {
+    width: 66%;
+    .button_link {
+      padding: 0;
+      margin: 0;
+      align-items: center;
+    }
+    .button_link:hover {
+      background: none;
+      padding: 0;
+      margin: 0;
+    }
+  }
+  .pos-right {
+    width: 30%;
+  }
+  .btn {
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+  }
+  .anticon.anticon-edit {
+    padding-right: 0;
+  }
+
+  .btn-search {
+    cursor: pointer;
+  }
+
+  .multiples {
+    .ant-select:hover,
+    .ant-select-focused {
+      border-color: #646462;
+    }
+
+    .ant-select-focused:not(.ant-select-disabled).ant-select:not(.ant-select-customize-input)
+      .ant-select-selector {
+      border-color: #bdbcb9;
+    }
+
+    .ant-select-focused:not(.ant-select-disabled).ant-select:not(.ant-select-customize-input)
+      .ant-select-selector {
+      border-color: #bdbcb9;
+    }
+  }
+
+  .ant-select-selection-overflow-item {
+    margin-left: -4px;
+  }
+  .button_cancel {
+    background-color: white;
+    border: 1px solid rgb(224, 222, 222);
+    padding-left: 18px;
+  }
+  .button_preview {
+    background-color: #bae8e8;
+    border: 1px solid rgb(224, 222, 222);
+    padding-left: 18px;
+  }
+
+  .button_save:hover {
+    color: #ffd803 !important;
+    border: 1px solid #ffd803 !important;
+  }
+
+  .ant-tag {
+    display: flex;
+    align-items: center;
+  }
+
+  .ant-tag,
+  .ant-tag a,
+  .ant-tag a {
+    color: rgb(16, 85, 189);
+  }
+
+  .button_save {
+    padding: 0px 24px;
+  }
+
+  .ant-btn {
+    height: 38px !important;
+  }
+  .anticon.anticon-link > svg {
+    font-size: 12px;
+  }
+  .w-md-editor-toolbar li > button {
+    height: 40px !important;
+    width: 40px !important;
+  }
+  .w-md-editor-toolbar {
+    height: 40px !important;
+  }
+  ::-moz-selection {
+    background: rgba(14, 14, 14, 0.2) !important;
+  }
+  ::selection {
+    background: rgba(14, 14, 14, 0.2) !important;
+  }
+}

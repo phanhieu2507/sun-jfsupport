@@ -1,0 +1,16 @@
+.MemberTaskList {
+    .ant-btn:hover,
+    .ant-btn:focus,
+    .option-active {
+        background-color: #ffd803 !important;
+        border-radius: 10px !important;
+    }
+    .ant-btn
+    {
+        color: black;
+    }
+    .ant-select-selector {
+        display: flex;
+        align-items: center;
+    }
+}

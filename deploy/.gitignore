@@ -1,0 +1,7 @@
+/bin
+
+values.*.yml
+!values.default.yml
+!values.example.yml
+
+inventory.*.yml*

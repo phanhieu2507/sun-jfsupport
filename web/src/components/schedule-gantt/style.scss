@@ -1,0 +1,44 @@
+@use 'sass:map';
+
+$colors: (
+  0: red,
+  1: green,
+  2: blue,
+  3: orange,
+  4: violet,
+  5: rgb(119, 14, 63),
+  6: rgba(5, 193, 218, 0.945),
+  7: rgba(30, 56, 44, 0.651)
+);
+.schedule-gantt {
+  @each $index, $color in $colors {
+    .bg-category-#{$index} {
+      background-color: #{$color};
+    }
+  }
+
+  .ant-table-thead > tr > th,
+  .ant-table-tbody > tr > td,
+  .ant-table tfoot > tr > th,
+  .ant-table tfoot > tr > td {
+    padding: 4px 10px;
+  }
+
+  .ant-table-row {
+    // text-align: center;
+    font-size: medium;
+  }
+}
+.schedule_details_task {
+  height: 40px;
+  border-radius: 40px;
+}
+svg {
+  z-index: 1 !important;
+}
+th {
+  z-index: 2 !important;
+}
+.ant-table-cell-fix-left {
+  z-index: 3 !important;
+}

@@ -1,0 +1,43 @@
+---
+- hosts: manager[0]
+  vars:
+    webserver_image: "{{ image.registry }}/{{ image.webserver }}:{{ image.tag }}"
+    apiserver_image: "{{ image.registry }}/{{ image.apiserver }}:{{ image.tag }}"
+    cli_image: "{{ image.registry }}/{{ image.cli }}:{{ image.tag }}"
+  tasks:
+  - import_tasks: tasks/configure-python.yml
+
+  - import_tasks: tasks/docker-login.yml
+
+  - name: Pull application images
+    docker_image:
+      name: "{{ item }}"
+      source: pull
+      force_source: true
+      state: present
+    loop:
+    - "{{ webserver_image }}"
+    - "{{ apiserver_image }}"
+    - "{{ cli_image }}"
+    register: docker_images
+
+  - name: Mark updated images
+    set_fact:
+      updated_images: "{{ updated_images | default([]) + [item.item] }}"
+    no_log: true
+    when: (force | default(false)) or item.changed
+    with_items: "{{ docker_images.results }}"
+
+  - name: Update services
+    shell: >
+      docker service update {{ item.service }} --image={{ item.image }} --with-registry-auth
+    loop:
+    - service: jobfair_web
+      image: "{{ webserver_image }}"
+    - service: jobfair_api
+      image: "{{ apiserver_image }}"
+    - service: jobfair_worker
+      image: "{{ cli_image }}"
+    - service: jobfair_scheduler
+      image: "{{ cli_image }}"
+    when: item.image in updated_images | default([])

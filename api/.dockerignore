@@ -1,0 +1,41 @@
+# Git
+*/**/.git
+*/**/.gitignore
+*/**/.gitattributes
+
+# Docker
+.dockerignore
+
+# Env files
+.env*
+
+# Storages
+/public/vendor/telescope
+/public/storage
+storage/app/*
+storage/builds/*
+
+# Framework files
+bootstrap/cache/*
+
+storage/*.key
+storage/framework/*/*
+storage/logs/*
+
+# Composer
+vendor
+
+# Logs
+*/**/*.log
+
+# Tests
+tests
+coverage
+phpunit.xml
+.phpunit.result.cache
+
+# Linters
+phpcs.xml
+
+# Docs
+README.md
